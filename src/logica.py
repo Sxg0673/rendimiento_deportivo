@@ -97,7 +97,6 @@ def reporte_general():
     
     
     
-    
 
 def reporte_individual(nombre):
     """
