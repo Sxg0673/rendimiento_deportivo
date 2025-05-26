@@ -9,7 +9,8 @@ from visuales import ( # importar funciones gráficas
     matriz_correlacion,
     histograma_puntajes,
     histograma_dificultades,
-    histograma_dificultades
+    histograma_dificultades,
+    histograma_ponderados
 )
 
 # Ruta del archivo CSV que almacenará los proyectos
@@ -138,7 +139,7 @@ def reporte_individual(nombre):
     # Llamar a funciones gráficas
     histograma_puntajes(datos)
     histograma_dificultades(datos)
-    istograma_ponderados(datos)
+    histograma_ponderados(datos)
 
     return datos
     

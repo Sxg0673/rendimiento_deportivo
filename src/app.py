@@ -118,7 +118,28 @@ class App(tk.Tk): # Hereda la clase tk.Tk
         texto_stats.insert(tk.END, f"\n\nPromedio general del grupo: {round(promedio, 2)}")
     
     def abrir_formulario_reporte_individual(self):
-        pass
+        ventana = tk.Toplevel(self)
+        ventana.title("Reporte Individual")
+        ventana.geometry("400x200")
+
+        tk.Label(ventana, text="Nombre del participante:").grid(row=0, column=0, padx=5, pady=5)
+        entrada_nombre = tk.Entry(ventana)
+        entrada_nombre.grid(row=0, column=1, padx=5, pady=5)
+
+        def buscar():
+            nombre = entrada_nombre.get().strip()
+            datos = reporte_individual(nombre)
+
+            if datos is None:
+                messagebox.showerror("No encontrado", "No se encontró un participante con ese nombre.")
+                return
+
+            estado = "Clasificó" if datos["clasifico"] else "No clasificó"
+            mensaje = f"{nombre} obtuvo un puntaje final de {datos['puntaje_final']}.\nEstado: {estado}"
+            messagebox.showinfo("Reporte Individual", mensaje)
+
+        tk.Button(ventana, text="Buscar", command=buscar).grid(row=1, column=0, columnspan=2, pady=10)
+
     
     def salir(self):
         pass
