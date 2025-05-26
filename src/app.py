@@ -35,7 +35,7 @@ class App(tk.Tk): # Hereda la clase tk.Tk
 
     def crear_widgets(self):
         # Botón para registrar nuevo usuario
-        boton_registrar = tk.Button(self, text="Registrar Participante", command=self.abrir_formulario_registro_particiapnte)
+        boton_registrar = tk.Button(self, text="Registrar Participante", command=self.abrir_formulario_registro_particiapante)
         boton_registrar.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")  # http://acodigo.blogspot.com/2017/03/tkinter-grid.html#google_vignette
 
         # Botón para ver reporte general
@@ -47,10 +47,10 @@ class App(tk.Tk): # Hereda la clase tk.Tk
         btn_eliminar.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
         # Botón para salir y borrar base de datos
-        btn_actualizar = tk.Button(self, text="Salir", command=self.salir)
+        btn_actualizar = tk.Button(self, text="Borrar Datos", command=self.salir)
         btn_actualizar.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
         
-    def abrir_formulario_registro_particiapnte(self):
+    def abrir_formulario_registro_particiapante(self):
         ventana = tk.Toplevel(self)
         ventana.title("Registrar Participante")
         ventana.geometry("400x300")
@@ -142,7 +142,13 @@ class App(tk.Tk): # Hereda la clase tk.Tk
 
     
     def salir(self):
-        pass
+        confirmacion = messagebox.askyesno("Confirmar", "¿Seguro que deseas borrar la base de datos?")
+        if confirmacion:
+            exito = salir()
+            if exito:
+                messagebox.showinfo("Listo", "Base de datos eliminada correctamente.")
+            else:
+                messagebox.showinfo("Sin acción", "No existía una base de datos para eliminar.")
     
     
         

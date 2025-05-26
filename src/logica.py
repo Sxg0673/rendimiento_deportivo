@@ -9,7 +9,6 @@ from visuales import ( # importar funciones gráficas
     matriz_correlacion,
     histograma_puntajes,
     histograma_dificultades,
-    histograma_dificultades,
     histograma_ponderados
 )
 
@@ -146,9 +145,8 @@ def reporte_individual(nombre):
 def salir():
     """
     Elimina el archivo 'participantes.csv' si existe.
-
-    - Se ejecuta al seleccionar la opción 'Salir' desde la interfaz gráfica.
-    - Borra la base de datos para reiniciar el sistema en la próxima ejecución.
-    - Se confirmara esta acción desde la GUI antes de ejecutarla.
     """
-    pass
+    if os.path.isfile(ARCHIVO_CSV):
+        os.remove(ARCHIVO_CSV)
+        return True
+    return False
