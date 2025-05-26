@@ -77,13 +77,16 @@ class App(tk.Tk): # Hereda la clase tk.Tk
             # Confirma que todos los datos esten digitados correctamente
             nombre = entrada_nombre.get().strip()
             try:
+                # Convierto estos valores en flotantes
                 resistencia = float(entrada_resistencia.get())
                 fuerza = float(entrada_fuerza.get())
                 velocidad = float(entrada_velocidad.get())
 
+                # Verifico que los valores esten en el rango
                 if not (0 <= resistencia <= 100 and 0 <= fuerza <= 100 and 0 <= velocidad <= 100):
                     raise ValueError #https://docs.python.org/es/3.13/tutorial/errors.html
 
+                # Le entrego los valores a la funcion en logica.py
                 registrar_participante(nombre, resistencia, fuerza, velocidad)
                 messagebox.showinfo("Éxito", "Participante registrado correctamente.")
                 ventana.destroy()
@@ -107,7 +110,8 @@ class App(tk.Tk): # Hereda la clase tk.Tk
         ventana = tk.Toplevel(self)
         ventana.title("Reporte General")
         ventana.geometry("700x500")
-
+        
+        # Creo el campo donde ira el reporte
         texto_tabla = tk.Text(ventana, height=10, width=80)
         texto_tabla.pack(padx=10, pady=10)
 
@@ -116,9 +120,11 @@ class App(tk.Tk): # Hereda la clase tk.Tk
             linea = f"{fila['nombre']} - Puntaje: {fila['puntaje_final']} → {estado}\n" # Reporte
             texto_tabla.insert(tk.END, linea) # Insertamos
 
+        # Creo el campo donde iran las estadisticas
         texto_stats = tk.Text(ventana, height=15, width=80)
         texto_stats.pack(padx=10, pady=10)
 
+        # Inserto los valores
         texto_stats.insert(tk.END, "Estadísticas Generales:\n")
         texto_stats.insert(tk.END, stats.to_string())
         texto_stats.insert(tk.END, f"\n\nPromedio general del grupo: {round(promedio, 2)}")
