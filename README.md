@@ -30,6 +30,7 @@ El sistema calcula un puntaje final ponderado usando dificultades aleatorias en 
 
 ## Estructura del Proyecto
 
+```text
 rendimiento_deportivo/
 ├── src/
 │ ├── app.py # Interfaz gráfica

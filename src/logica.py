@@ -4,6 +4,8 @@ import math
 import os
 import pandas as pd
 
+from .visuales import grafico_torta, matriz_correlacion  # importar funciones gráficas
+
 # Ruta del archivo CSV que almacenará los proyectos
 ARCHIVO_CSV = 'data/participantes.csv'
 
@@ -73,15 +75,28 @@ def registrar_participante(nombre, r_resistencia, r_fuerza, r_velocidad):
     
 def reporte_general():
     """
-    Genera un reporte general del rendimiento de todos los participantes registrados.
-
-    - Carga los datos del archivo 'participantes.csv'.
-    - Muestra en consola: nombre, puntaje final y estado de clasificación.
-    - Calcula y muestra estadísticas generales con pandas (describe).
-    - Calcula el puntaje promedio del grupo.
-    - Genera un gráfico de torta con el total de clasificados y no clasificados.
-    - Genera una matriz de correlación entre los puntajes en las pruebas.
+    Genera los elementos del reporte general:
+    - Retorna DataFrame con nombre, puntaje final y clasificación.
+    - Llama funciones gráficas para torta y correlación.
     """
+    
+    # Intentamos leer el archivo
+    try:
+        df = pd.read_csv(ARCHIVO_CSV)
+        return df
+    except FileNotFoundError:
+        return None
+
+    # Llamamos a las gráficas
+    grafico_torta(df)
+    matriz_correlacion(df)
+
+    # Retornamos lo que se nos pide para la GUI
+    return df[['nombre', 'puntaje_final', 'clasifico']]
+    
+    
+    
+    
     
 
 def reporte_individual(nombre):
