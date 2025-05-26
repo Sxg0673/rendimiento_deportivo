@@ -4,10 +4,11 @@ import math
 import os
 import pandas as pd
 
-from .visuales import ( # importar funciones gráficas
+from visuales import ( # importar funciones gráficas
     grafico_torta,
     matriz_correlacion,
-    graficar_histograma_puntajes,
+    histograma_puntajes,
+    histograma_dificultades,
     histograma_dificultades
 )
 
