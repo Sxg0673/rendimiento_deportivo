@@ -89,17 +89,18 @@ def reporte_general():
     # Intentamos leer el archivo
     try:
         df = pd.read_csv(ARCHIVO_CSV)
-        return df
     except FileNotFoundError:
         return None, None, None #tres valores porque abajo tambien devolvemos 3
 
+
+    # Calcular estadísticas
+    estadisticas = df[['resistencia', 'fuerza', 'velocidad', 'puntaje_final']].describe()
+    promedio_general = df['puntaje_final'].mean()
+    
     # Llamamos a las gráficas
     grafico_torta(df)
     matriz_correlacion(df)
     
-    # Calcular estadísticas
-    estadisticas = df[['resistencia', 'fuerza', 'velocidad', 'puntaje_final']].describe()
-    promedio_general = df['puntaje_final'].mean()
 
     # Retornamos lo que se nos pide para la GUI
     return df[['nombre', 'puntaje_final', 'clasifico']], estadisticas, promedio_general

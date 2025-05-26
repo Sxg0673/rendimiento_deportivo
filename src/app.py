@@ -51,7 +51,45 @@ class App(tk.Tk): # Hereda la clase tk.Tk
         btn_actualizar.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
         
     def abrir_formulario_registro_particiapnte(self):
-        pass
+        ventana = tk.Toplevel(self)
+        ventana.title("Registrar Participante")
+        ventana.geometry("400x300")
+
+        tk.Label(ventana, text="Nombre:").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+        entrada_nombre = tk.Entry(ventana)
+        entrada_nombre.grid(row=0, column=1, padx=5, pady=5)
+
+        tk.Label(ventana, text="Resistencia (0-100):").grid(row=1, column=0, padx=5, pady=5, sticky="e")
+        entrada_resistencia = tk.Entry(ventana)
+        entrada_resistencia.grid(row=1, column=1, padx=5, pady=5)
+
+        tk.Label(ventana, text="Fuerza (0-100):").grid(row=2, column=0, padx=5, pady=5, sticky="e")
+        entrada_fuerza = tk.Entry(ventana)
+        entrada_fuerza.grid(row=2, column=1, padx=5, pady=5)
+
+        tk.Label(ventana, text="Velocidad (0-100):").grid(row=3, column=0, padx=5, pady=5, sticky="e")
+        entrada_velocidad = tk.Entry(ventana)
+        entrada_velocidad.grid(row=3, column=1, padx=5, pady=5)
+
+        def confirmar_registro():
+            nombre = entrada_nombre.get().strip()
+            try:
+                resistencia = float(entrada_resistencia.get())
+                fuerza = float(entrada_fuerza.get())
+                velocidad = float(entrada_velocidad.get())
+
+                if not (0 <= resistencia <= 100 and 0 <= fuerza <= 100 and 0 <= velocidad <= 100):
+                    raise ValueError
+
+                registrar_participante(nombre, resistencia, fuerza, velocidad)
+                messagebox.showinfo("Éxito", "Participante registrado correctamente.")
+                ventana.destroy()
+            except ValueError:
+                messagebox.showerror("Error", "Todos los valores deben ser números entre 0 y 100.")
+
+        boton_guardar = tk.Button(ventana, text="Guardar", command=confirmar_registro)
+        boton_guardar.grid(row=4, column=0, columnspan=2, pady=10)
+
 
     def abrir_formulario_reporte_general(self):
         df, stats, promedio = reporte_general()
