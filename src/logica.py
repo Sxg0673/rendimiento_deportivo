@@ -91,7 +91,7 @@ def reporte_general():
         df = pd.read_csv(ARCHIVO_CSV)
         return df
     except FileNotFoundError:
-        return None
+        return None, None, None #tres valores porque abajo tambien devolvemos 3
 
     # Llamamos a las gráficas
     grafico_torta(df)

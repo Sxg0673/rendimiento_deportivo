@@ -52,9 +52,32 @@ class App(tk.Tk): # Hereda la clase tk.Tk
         
     def abrir_formulario_registro_particiapnte(self):
         pass
-    
+
     def abrir_formulario_reporte_general(self):
-        pass
+        df, stats, promedio = reporte_general()
+
+        if df is None:
+            messagebox.showinfo("Sin datos", "No hay participantes registrados aún.")
+            return
+
+        ventana = tk.Toplevel(self)
+        ventana.title("Reporte General")
+        ventana.geometry("700x500")
+
+        texto_tabla = tk.Text(ventana, height=10, width=80)
+        texto_tabla.pack(padx=10, pady=10)
+
+        for _, fila in df.iterrows():
+            estado = "Clasificó" if fila["clasifico"] else "No clasificó"
+            linea = f"{fila['nombre']} - Puntaje: {fila['puntaje_final']} → {estado}\n"
+            texto_tabla.insert(tk.END, linea)
+
+        texto_stats = tk.Text(ventana, height=15, width=80)
+        texto_stats.pack(padx=10, pady=10)
+
+        texto_stats.insert(tk.END, "Estadísticas Generales:\n")
+        texto_stats.insert(tk.END, stats.to_string())
+        texto_stats.insert(tk.END, f"\n\nPromedio general del grupo: {round(promedio, 2)}")
     
     def abrir_formulario_reporte_individual(self):
         pass
