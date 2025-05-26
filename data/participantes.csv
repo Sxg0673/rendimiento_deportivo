@@ -1,3 +1,4 @@
 nombre,resistencia,fuerza,velocidad,dificultad_resistencia,dificultad_fuerza,dificultad_velocidad,puntaje_final,clasifico
 a,12.0,12.0,12.0,1.16,1.22,1.11,12,False
 b,80.0,90.0,60.0,1.08,1.12,1.08,77,True
+p,0.0,0.0,0.0,1.15,1.27,1.29,0,False

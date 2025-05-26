@@ -121,6 +121,7 @@ def reporte_individual(nombre):
         2. Dificultad aplicada en cada prueba.
         3. Puntaje ponderado por prueba.
     """
+    # Intengo leer el archivo
     try:
         df = pd.read_csv(ARCHIVO_CSV)
     except FileNotFoundError:
