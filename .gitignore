@@ -1,0 +1,14 @@
+# Ignorar el entorno de Conda (por si se guarda en la carpeta del proyecto)
+rendimiento_deportivo_env/
+env/
+
+# Ignorar archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Ignorar archivos de configuración de VSCode
+.vscode/
+
+# Ignorar archivos ocultos de macOS
+.DS_Store
+
