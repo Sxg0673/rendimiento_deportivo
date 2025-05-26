@@ -36,7 +36,7 @@ rendimiento_deportivo/
 │ ├── app.py # Interfaz gráfica
 │ ├── logica.py # Clases y lógica del sistema
 │ ├── visuales.py # Gráficos y reportes
-├── data/ # Archivos de datos (participants.csv)
+├── data/ # Archivos de datos (participantes.csv)
 ├── .gitignore
 └── README.md
 

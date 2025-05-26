@@ -4,7 +4,12 @@ import math
 import os
 import pandas as pd
 
-from .visuales import grafico_torta, matriz_correlacion  # importar funciones gráficas
+from .visuales import ( # importar funciones gráficas
+    grafico_torta,
+    matriz_correlacion,
+    graficar_histograma_puntajes,
+    histograma_dificultades
+)
 
 # Ruta del archivo CSV que almacenará los proyectos
 ARCHIVO_CSV = 'data/participantes.csv'
@@ -90,9 +95,13 @@ def reporte_general():
     # Llamamos a las gráficas
     grafico_torta(df)
     matriz_correlacion(df)
+    
+    # Calcular estadísticas
+    estadisticas = df[['resistencia', 'fuerza', 'velocidad', 'puntaje_final']].describe()
+    promedio_general = df['puntaje_final'].mean()
 
     # Retornamos lo que se nos pide para la GUI
-    return df[['nombre', 'puntaje_final', 'clasifico']]
+    return df[['nombre', 'puntaje_final', 'clasifico']], estadisticas, promedio_general
     
     
     
@@ -110,7 +119,26 @@ def reporte_individual(nombre):
         2. Dificultad aplicada en cada prueba.
         3. Puntaje ponderado por prueba.
     """
-    pass
+    try:
+        df = pd.read_csv(ARCHIVO_CSV)
+    except FileNotFoundError:
+        return None
+    
+    # Filtrar por nombre (caso insensible)
+    participante = df[df['nombre'].str.lower() == nombre.lower()]
+
+    if participante.empty:
+        return None
+
+    # Convertir a diccionario para retorno y graficación
+    datos = participante.iloc[0].to_dict()
+
+    # Llamar a funciones gráficas
+    histograma_puntajes(datos)
+    histograma_dificultades(datos)
+    istograma_ponderados(datos)
+
+    return datos
     
 def salir():
     """
